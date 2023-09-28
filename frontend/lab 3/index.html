@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<head>
+<title>LAB 3</title>
+</head>
+<body>
+    <a href="../content.html">&lt;&lt;&lt; Go back to see other works </a>
+    <hr>
+    <div>
+        <h2>RACE REGISTRATION FORM</h2>
+        <form>
+            <label for="email">E-mail:</label> 
+            <input type="text" id="email" name="email"><br>
+
+            <p>Title - 
+                <input type="radio" id="mr" name="title" value="Mr.">
+                <label for="mr">Mr.</label>
+                <input type="radio" id="ms" name="title" value="Ms.">
+                <label for="ms">Ms.</label>
+                <input type="radio" id="mrs" name="title" value="Mrs.">
+                <label for="mrs">Mrs.</label>
+            </p>
+
+            <table>
+                <tr>
+                    <td><label for="fname">First Name:</label></td>
+                    <td><label for="lname">Last Name:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="fname" name="fname"></td>
+                    <td><input type="text" id="lname" name="lname"></td>
+                </tr>
+            </table>
+
+            <label for="address">Complete Postal Mailing Address (with Postal Code & Country)</label><br>
+            <textarea id="address" name="address" rows="4" cols="75"></textarea><br>
+
+            <label for="phone">Phone:</label> 
+            <input type="text" id="phone" name="phone">
+            <label for="fax">Fax:</label> 
+            <input type="text" id="fax" name="fax"><br>
+
+            <label for="occup">Occupation:</label> 
+            <input type="text" id="occup" name="occup">
+            <label for="marital">Marital Status:</label> 
+            <input type="text" id="marital" name="marital"><br>
+
+            <table>
+                <tr>
+                    <td style="padding-right: 50px;">Emegency Contact</td>
+                    <td><label for="name">Name</label></td>
+                    <td><label for="email">Email</label></td>
+                    <td><label for="phone">Phone No</label></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="text" id="name" name="name"></td>
+                    <td><input type="text" id="email" name="email"></td>
+                    <td><input type="text" id="phone" name="phone"></td>
+                </tr>
+            </table>
+
+            <p>Choose a trip -</p>
+            <input type="checkbox" id="trip1" name="trip1" value="StageRace">
+            <label for="trip1"> Stage Race</label>
+            <input type="checkbox" id="trip2" name="trip2" value="Marathon">
+            <label for="trip2"> Mt. Everest Challenge Marathon (4 day trip)</label>
+            <input type="checkbox" id="trip3" name="trip3" value="BikeRally">
+            <label for="trip3"> Mt. Everest Bike Rally</label>
+
+            <table>
+                <tr>
+                    <td>
+                        I am a
+                    </td>
+                    <td>
+                        <input type="checkbox" id="iam1" name="iam1" value="Runner">
+                        <label for="iam1"> Runner</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="iam2" name="iam2" value="Walker">
+                        <label for="iam2"> Walker</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="iam3" name="iam3" value="Cyclist">
+                        <label for="iam3"> Cyclist</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        T-Shirt Size
+                    </td>
+                    <td>
+                        <input type="checkbox" id="size1" name="size1" value="Small">
+                        <label for="size1"> Small</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="size2" name="size2" value="Medium">
+                        <label for="size2"> Medium</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="size3" name="size3" value="Large">
+                        <label for="size3"> Large</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="size4" name="size4" value="XLarge">
+                        <label for="size4"> X-Large</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Smoker
+                    </td>
+                    <td>
+                        <input type="checkbox" id="smoke1" name="smoke1" value="Yes">
+                        <label for="smoke1"> Yes</label>
+                    </td>
+                    <td>
+                        <input type="checkbox" id="smoke2" name="smoke2" value="No">
+                        <label for="smoke2"> No</label>
+                    </td>
+            </table>
+
+            <label for="prefs">Room Sharing Preference</label> 
+            <input type="text" id="prefs" name="prefs"><br>
+
+            <h3>Passport Details</h3>
+            <label for="passport">Exact name as appears</label><br>
+            <input type="text" id="passport" name="passport"><br>
+
+            <table>
+                <tr>
+                    <td><label for="pNumber">Number</label></td>
+                    <td><label for="pIssued">Date Issued</label></td>
+                    <td><label for="pWhere">Where Issued</label></td>
+                    <td><label for="pExpires">Date Expires</label></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="pNumber" name="pNumber"></td>
+                    <td><input type="text" id="pIssued" name="pIssued"></td>
+                    <td><input type="text" id="pWhere" name="pWhere"></td>
+                    <td><input type="text" id="pExpires" name="pExpires"></td>
+                </tr>
+                <tr>
+                    <td><label for="pBDay">Date of Birth</label></td>
+                    <td><label for="pAge">Age</label></td>
+                    <td><label for="pBirthPlace">Place of Birth</label></td>
+                    <td><label for="pCitizen">Citizen of</label></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="pBDay" name="pBDay"></td>
+                    <td><input type="text" id="pAge" name="pAge"></td>
+                    <td><input type="text" id="pBirthPlace" name="pBirthPlace"></td>
+                    <td><input type="text" id="pCitizen" name="pCitizen"></td>
+                </tr>
+            </table>
+
+            <a href="#">See Booking Conditions for all the trips</a><br>
+            <label for="agreement">I agree to all booking terms & conditions</label>
+            <input type="checkbox" id="agreement" name="agreement" value="agree"><br>
+                        
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
