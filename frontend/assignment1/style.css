@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(237, 226, 208);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-image: url('pin 1 transp.png');
+    
+  }
+  
+  h1 {
+    color: rgb(3, 181, 60);
+    margin-left: 20px;
+   
+  }
+  img {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 150px;
+  }
+  p {
+    font-size: 20px;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+  }
+  
+  
+  .topnav {
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: rgb(3, 181, 60);
+    color: #530071;
+  }
+.tag{background-color:#530071;display:inline-block;padding-left:8px;padding-right:8px;text-align:center}
