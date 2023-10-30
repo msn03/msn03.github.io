@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>JAVASCRIPT</title>
+
+<script>
+    function reverseNumber() {
+      let x = document.forms["task1"]["num"].value;
+      document.getElementById('output1').innerHTML = x.split('').reverse().join('');
+    }
+
+    function abcOrder() {
+      let y = document.forms["task2"]["string1"].value;
+      document.getElementById('output2').innerHTML = y.split('').sort().join('');
+    }
+
+    function triangleArea() {
+      let a = document.forms["task3"]["side1"].value;
+      let b = document.forms["task3"]["side2"].value;
+      let c = document.forms["task3"]["side3"].value;
+      a = parseInt(a, 10);
+      b = parseInt(b, 10);
+      c = parseInt(c, 10);
+      let semiP= (a+b+c)/2;
+      document.getElementById('output3-semi').innerHTML = semiP;
+      document.getElementById('output3').innerHTML = Math.sqrt(semiP*(semiP-a)*(semiP-b)*(semiP-c));
+    }
+
+    function multiply() {
+      let n1 = document.forms["task4"]["num1"].value;
+      let n2 = document.forms["task4"]["num2"].value;
+      document.getElementById('output4').innerHTML = n1*n2;
+    }
+    function divide() {
+        let n1 = document.forms["task4"]["num1"].value;
+      let n2 = document.forms["task4"]["num2"].value;
+      document.getElementById('output4').innerHTML = n1/n2;
+    }
+
+
+    let v1;
+    let v2;
+    let temp;
+    function varApply() {
+        v1 = document.forms["task5"]["var1"].value;
+        v2 = document.forms["task5"]["var2"].value;
+        document.getElementById('output5-a').innerHTML = v1;
+        document.getElementById('output5-b').innerHTML = v2;
+    }
+    function varSwap() {
+        temp = v1;
+        v1 = v2;
+        v2 = temp;
+        document.getElementById('output5-a').innerHTML = v1;
+        document.getElementById('output5-b').innerHTML = v2;
+    }
+    function upCase() {
+      let xyz = document.forms["task6"]["strUpCase"].value;
+      document.getElementById('output6').innerHTML = xyz.charAt(0).toUpperCase() + xyz.slice(1);
+    }
+
+    function getFactorial() {
+        let num = document.forms["task7"]["numFactorial"].value;
+        let result = num;
+        if (num === 0 || num === 1) 
+            return 1; 
+        while (num > 1) { 
+            num--;
+            result *= num;
+        }
+      document.getElementById('output7').innerHTML = result;
+    }
+
+    function letterCount() {
+        let stringToCount = document.forms["task8"]["str"].value;
+        let letterToFind = document.forms["task8"]["letter"].value;
+        let lettersFound = 0;
+        for (var pos = 0; pos < stringToCount.length; pos++) 
+        {
+            if (stringToCount.charAt(pos) == letterToFind) 
+            {
+                lettersFound += 1;
+            }
+        }
+        document.getElementById('output8').innerHTML = lettersFound;
+    }
+</script>
+
+</head>
+
+
+
+<body>
+    <div style="background-color: aquamarine;">
+        <h2>Task 1. reversing a number</h2>
+        <form name="task1">
+            <input type="number" name="num" placeholder="enter the number">
+            <button type="button" onclick="return reverseNumber()"> reverse </button>
+        </form>
+        Result: <div id="output1"></div>
+    </div>
+    <div style="background-color:mediumspringgreen">
+        <h2>Task 2. letters in ABC order</h2>
+        <form name="task2">
+            <input type="text" name="string1" placeholder="enter the string">
+            <button type="button" onclick="return abcOrder()"> ABC order </button>
+        </form>
+        Result: <div id="output2"></div>
+    </div>
+    <div style="background-color:skyblue">
+        <h2>Task 3. find the area of triangle with three sides</h2>
+        <form name="task3">
+            <input type="text" name="side1" placeholder="enter the number" value="5" size="12">
+            <input type="text" name="side2" placeholder="enter the number" value="6" size="12">
+            <input type="text" name="side3" placeholder="enter the number" value="7" size="12">
+            <button type="button" onclick="return triangleArea()"> calculate </button>
+        </form>
+        Semiperimeter: <div id="output3-semi"></div>
+        Result: <div id="output3"></div>
+    </div>
+    <div style="background-color:lightpink">
+        <h2>Task 4. multiply or divide the numbers</h2>
+        <form name="task4">
+            <input type="text" name="num1" placeholder="enter the number">
+            <input type="text" name="num2" placeholder="enter the number">
+            <button type="button" onclick="return multiply()"> multiply </button>
+            <button type="button" onclick="return divide()"> divide </button>
+        </form>
+        Result: <div id="output4"></div>
+    </div>
+    <div style="background-color:khaki">
+        <h2>Task 5. swaping two variables</h2>
+        <form name="task5">
+            <input type="text" name="var1" placeholder="enter the number">
+            <input type="text" name="var2" placeholder="enter the number">
+            <button type="button" onclick="return varApply()"> apply new values </button>
+            <button type="button" onclick="return varSwap()"> swap variables </button>
+        </form>
+        variable A: <div id="output5-a"></div>
+        variable B: <div id="output5-b"></div>
+    </div>
+    <div style="background-color:lightsalmon">
+        <h2>Task 6. first letter in uppercase</h2>
+        <form name="task6">
+            <input type="text" name="strUpCase" placeholder="enter the string">
+            <button type="button" onclick="return upCase()"> uppercase </button>
+        </form>
+        Result: <div id="output6"></div>
+    </div>
+    <div style="background-color:moccasin">
+        <h2>Task 7. get factorial</h2>
+        <form name="task7">
+            <input type="number" name="numFactorial" placeholder="enter the number">
+            <button type="button" onclick="return getFactorial()"> find factorial </button>
+        </form>
+        Result: <div id="output7"></div>
+    </div>
+    <div style="background-color:rgb(242, 189, 255)">
+        <h2>Task 8. count of a letter in a string</h2>
+        <form name="task8">
+            <input type="text" name="str" placeholder="enter the string">
+            <input type="text" name="letter" placeholder="enter the letter" maxlength="1"  size="10">
+            <button type="button" onclick="return letterCount()"> count letters </button>
+        </form>
+        Result: <div id="output8"></div>
+    </div>
+</body>
+</html>

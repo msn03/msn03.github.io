@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>COOLEST WEBPAGE EVER</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="../../bootstrap.min.css">
+    <!-- Pixel CSS -->
+    <link type="text/css" rel="stylesheet" href="../../css/style.css">
+
+<script>
+    function isInRange() {
+        let t1n1 = document.forms["task1"]["t1num1"].value;
+        let t1n2 = document.forms["task1"]["t1num2"].value;
+        if ((50 <= t1n1 && t1n1 <= 99) || (50 <= t1n2 && t1n2 <= 99))
+        {
+            document.getElementById('output1').innerHTML = "TRUE";
+        }
+        else
+        {
+            document.getElementById('output1').innerHTML = "FALSE";
+        }
+    }
+
+    function doesContain() {
+        let stringToCount = document.forms["task2"]["t2str"].value;
+        let letterToFind = document.forms["task2"]["t2letter"].value;
+        let partOfString = stringToCount.slice(1, 4);
+        if (partOfString.includes(letterToFind))
+        {
+            document.getElementById('output2').innerHTML = "TRUE";
+        }
+        else
+        {
+            document.getElementById('output2').innerHTML = "FALSE";
+        }
+    }
+
+    function updArray() {
+        var source = document.forms["task3"]["t3num"].value;
+        var arrayNum = source.split(" ");
+        var maxValue = Math.max(arrayNum[0], arrayNum[arrayNum.length - 1]);
+        for (var i = 0; i < arrayNum.length; i++) {
+            arrayNum[i] = maxValue;
+        }
+        document.getElementById('output3').innerHTML = arrayNum;
+    }
+
+    function replaceChar() {
+        var sourceStr = document.forms["task4"]["t4str"].value;
+        var replacedStr = '';
+        for (var i = 0; i < sourceStr.length; i++) 
+        {
+            var charCode = sourceStr.charCodeAt(i);
+            if (charCode == 122)                            // z
+            {
+                replacedStr += String.fromCharCode(97);     // z to a
+            } 
+            else if (charCode == 90)                        // Z
+            {
+                replacedStr += String.fromCharCode(65);     // Z to A
+            } 
+            else if ((charCode >= 65 && charCode <= 89) || (charCode >= 97 && charCode <= 121)) 
+            {
+                replacedStr += String.fromCharCode(charCode + 1);
+            } 
+            else 
+            {
+                replacedStr += sourceStr.charAt(i);
+            }
+        }
+        document.getElementById('output4').innerHTML = replacedStr;
+    }
+
+    function sortByLength() {
+        let strToSort = document.forms["task5"]["t5str"].value;
+        let arrToSort = strToSort.split(" ");
+        arrToSort.sort(function(a, b) 
+        {
+            if (a.length == b.length) 
+            {
+                return 0;
+            }
+            return a.length - b.length;
+        });
+
+        document.getElementById('output5').innerHTML = arrToSort;
+    }
+</script>
+
+</head>
+<body>
+    <main>
+        <!-- Hero -->
+            <section class="section section-lg bg-secondary overflow-hidden z-2">
+                <div class="container z-2">
+                    <div class="row justify-content-center pt-6 pt-md-5 pb-0 mb-2">
+                        <div class="col-12 col-xl-7">
+                            <div class="card card-tertiary">
+                                <div class="card-header text-left">
+                                    <span>LIST OF LABS FROM WEB TECHNOLOGIES (FRONTEND)</span>
+                                </div>
+                                <div class="card-body">
+                                    <div style="background-color: aquamarine;">
+                                        <h2>Task 1. is one of number in the range</h2>
+                                        <form name="task1">
+                                            <input type="number" name="t1num1" placeholder="enter the 1st number">
+                                            <input type="number" name="t1num2" placeholder="enter the 2nd number">
+                                            <button type="button" onclick="return isInRange()"> check </button>
+                                        </form>
+                                        Result: <div id="output1"></div>
+                                    </div>
+                                    <div style="background-color:mediumspringgreen">
+                                        <h2>Task 2. check for the char between 2nd and 4th pos</h2>
+                                        <form name="task2">
+                                            <input type="text" name="t2str" placeholder="enter the string">
+                                            <input type="text" name="t2letter" placeholder="enter the letter" maxlength="1"  size="10">
+                                            <button type="button" onclick="return doesContain()"> check </button>
+                                        </form>
+                                        Result: <div id="output2"></div>
+                                    </div>
+                                    <div style="background-color:skyblue">
+                                        <h2>Task 3. update array elements to the largest number (separate them with space)</h2>
+                                        <form name="task3">
+                                            <input type="text" name="t3num" placeholder="enter list of numbers">
+                                        
+                                            <button type="button" onclick="return updArray()"> update </button>
+                                        </form>
+                                        Result: <div id="output3"></div>
+                                    </div>
+                                    <div style="background-color:lightpink">
+                                        <h2>Task 4. change each chars in the string to next one</h2>
+                                        <form name="task4">
+                                            <input type="text" name="t4str" placeholder="enter the string">
+                                            <button type="button" onclick="return replaceChar()"> replace chars! </button>
+                                        </form>
+                                        Result: <div id="output4"></div>
+                                    </div>
+                                    <div style="background-color:khaki">
+                                        <h2>Task 5. sort strings by length</h2>
+                                        <form name="task5">
+                                            <input type="text" name="t5str" placeholder="enter the strings">
+                                            <button type="button" onclick="return sortByLength()"> sort </button>
+                                        </form>
+                                        variable A: <div id="output5"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main> 
+<footer>
+    <nav id="navbar-footer"
+        class="navbar navbar-main navbar-expand-lg navbar-dark justify-content-between navbar-footer">
+        <ul class="navbar-nav navbar-nav-hover flex-row align-items-center">
+            <li class="nav-item">
+                <a href="../../index.html" class="nav-link" role="button">
+                    <span class="nav-link-inner-text"><b>📺 Start</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../aboutme.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">🗣️ AboutMe</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../roadmap.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">💻 Roadmap</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../whatsnew.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">⭐ What's New?</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../frontend/content.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">Frontend (AITU)</span>
+                </a>
+            </li>
+        </ul>
+        <div class="time text-center">
+            <span class="time text-uppercase">1:50 PM</span>
+        </div>
+    </nav>
+</footer>
+
+<!-- Core -->
+<script src="../../jquery.min.js"></script>
+<script src="../../bootstrap.min.js"></script>
+
+<!-- pixel JS -->
+<script src="../../js/javascript.js"></script>
+</body>
+</html>

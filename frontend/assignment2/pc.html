@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CyberStore</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="store.css">
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/d25d1fab93.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <div class="container-fluid mx-5">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="CyberStore" style="width:210px;height:70px;">
+                    </a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="pc.html">Computers</a>
+                </li>
+                <li class="nav-item align-self-center">
+                    <a class="nav-link" href="laptop.html">Laptops</a>
+                </li>
+                <li class="nav-item dropdown align-self-center">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">PC Components</a>
+                    <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="underconstruction.html">CPU</a></li>
+                    <li><a class="dropdown-item" href="gpu.html">GPU</a></li>
+                    <li><a class="dropdown-item" href="underconstruction.html">Motherboard</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="text" placeholder="RTX 4090">
+                <button class="btn btn-primary" type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+    
+    
+    <div class="container p-5 mt-5 bg-white text-dark rounded-5">
+        
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">PCs</li>
+            </ol>
+        </nav>
+
+        <h3>Computers:</h3>
+        <div class="row">
+            <div class="col-3 bg-secondary text-white p-3 rounded-3">
+                <h4>Filters:</h4>
+                <form action="#">
+                    <h5>Price</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkA1" name="option1" value="something">
+                        <label class="form-check-label" for="checkA1">0-249 999</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkA2" name="option2" value="something">
+                        <label class="form-check-label" for="checkA2">250 000-499 999</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkA3" name="option3" value="something">
+                        <label class="form-check-label" for="checkA3">500 000+</label>
+                    </div><br>
+
+                    <h5>Aviability</h5>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkB1" name="option1" value="something" checked>
+                        <label class="form-check-label" for="check1">In Stock</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkB2" name="option2" value="something" checked>
+                        <label class="form-check-label" for="check2">Limited</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="checkB3" name="option3" value="something">
+                        <label class="form-check-label" for="checkB3">Out of Stock</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3">Apply</button>
+                </form>
+
+            </div>
+            <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            
+                            <div class="card" style="height: 100%;">
+                                <img class="card-img-top" src="images/pc/1.jpg" alt="Card image" style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">HP Pavilion</h4>
+                                    <ul class="card-text">
+                                        <li>AMD Ryzen 3</li>
+                                        <li>GeForce GTX 1650 Super</li>
+                                        <li>256 GB SSD</li>
+                                    </ul>
+                                    <strong>299 990 ₸ </strong>
+                                    <a href="cart.html" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="card" style="height: 100%;">
+                                <img class="card-img-top" src="images/pc/2.jpg" alt="Card image" style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">Lenovo Legion T5</h4>
+                                    <ul class="card-text">
+                                        <li>AMD Ryzen 5</li>
+                                        <li>GeForce RTX 3070</li>
+                                        <li>512 GB SSD</li>
+                                    </ul>
+                                    <strong>799 900 ₸ </strong>
+                                    <a href="cart.html" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card" style="height: 100%;">
+                                <img class="card-img-top" src="images/pc/3.jpg" alt="Card image" style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">HP Omen 30L</h4>
+                                    <ul class="card-text">
+                                        <li>AMD Ryzen 9</li>
+                                        <li>GeForce RTX 3080 Ti</li>
+                                        <li>1 TB SSD</li>
+                                    </ul>
+                                    <strong>1 599 990 ₸ </strong>
+                                    <a href="cart.html" class="btn btn-primary"><i class="fa-solid fa-cart-shopping"></i> Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+<div class="mt-5 bg-secondary">
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col-6 col-md-2 mb-3">
+                <h5>Links</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Discounts</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">New Products</a></li>
+                </ul>
+                </div>
+        
+                <div class="col-6 col-md-2 mb-3">
+                <h5>About Us</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Company</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Politics</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                </ul>
+                </div>
+        
+                <div class="col-6 col-md-2 mb-3">
+                <h5>Contacts</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">Kabanbai Batyr, 62, Astana</li>
+                </ul>
+                </div>
+        
+                <div class="col-md-5 offset-md-1 mb-3">
+                <form>
+                    <h5>Subscribe to our newsletter</h5>
+                    <p>You will be notified about new sales and products.</p>
+                    <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                    <input id="newsletter1" type="text" class="form-control" placeholder="Your Email address">
+                    <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                </form>
+                </div>
+            </div>
+      
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2023 Merlin's PC Company. All rights reserved.</p>
+            </div>
+        </footer>
+      </div>
+    </div>
+
+</body>
+</html>
