@@ -8,6 +8,42 @@
   src: url(font/upheavtt.ttf);
 }
 
+.rainbow_text_animated {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s linear infinite;
+    background-size: 1800% 1800%;
+
+
+-webkit-animation: rainbow 18s ease infinite;
+-z-animation: rainbow 18s ease infinite;
+-o-animation: rainbow 18s ease infinite;
+  animation: rainbow 18s ease infinite;}
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow { 
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+
+
 div {
   font-family: myFirstFont;
 }
@@ -20,6 +56,8 @@ BODY {
   color: #DDDDDD;
   font-family: myFirstFont;
   text-align: center;
+    position:relative; 
+    background-image: url('mine.gif');
 }
 
 H1 {
@@ -61,7 +99,10 @@ BUTTON {
 
 
 <body>
-    <H1>Minesweeper</H1>
+    <div id="shadowBox">
+      <H1 class="rainbow rainbow_text_animated">Minesweeper</H1>
+    </div>
+    
     <table id=grid>
     </table>
     <BUTTON onclick="generateGrid();">Reset Grid</BUTTON>
@@ -292,5 +333,6 @@ function clickCell(cell) {
 <p>Right Click/Hold - Put the Flag</p>
 <p>--- ^_^ ---</p>
 <p>v1.02 - the beginning of the game got easier <br>(3x3 mine-free space guaranteed)</p>
+<p>v1.03 - small visual update</p>
 </body>
 </html>
