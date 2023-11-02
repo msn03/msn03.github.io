@@ -11,6 +11,9 @@
 div {
   font-family: myFirstFont;
 }
+.font2 {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 BODY {
   background: black;
@@ -62,7 +65,7 @@ BUTTON {
     <table id=grid>
     </table>
     <BUTTON onclick="generateGrid();">Reset Grid</BUTTON>
-
+    
 
 
 <script>
@@ -71,6 +74,15 @@ BUTTON {
   var firstClick = true;
 generateGrid();
 
+function showMines() {
+  var checkBox = document.getElementById("showMines");
+
+  if (checkBox.checked == true){
+    testMode = true;
+  } else {
+    testMode = false;
+  }
+}
 
 
 function generateGrid() {
@@ -149,23 +161,66 @@ function revealMines() {
     }
 }
 
-function replaceMine(mine) {
+function replaceMine(mineCell) {
   //Replace mine if it's first click
-  mine.setAttribute("data-mine","false");
-  var i=0;
-  while (i<1) {
-    var row = Math.floor(Math.random() * 10);
-    var col = Math.floor(Math.random() * 10);
-    var cell = grid.rows[row].cells[col];
-    if (cell.getAttribute("data-mine")=="false")
+  firstClick=false;
+  var n=0;
+  var m=0;
+  
+    var minesToReplace=0;
+    var cellRow = mineCell.parentNode.rowIndex;
+    var cellCol = mineCell.cellIndex;
+    
+    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
     {
-      cell.setAttribute("data-mine","true");
-      i++;
+      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+      {
+        if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") minesToReplace++;
+      }
     }
-    if (testMode) cell.innerHTML="X";
-  }
-}
+    if(minesToReplace<0)
+    {
+      while (m<minesToReplace) 
+      {
+        var row = Math.floor(Math.random() * 10);
+        var col = Math.floor(Math.random() * 10);
+        var cell = grid.rows[row].cells[col];
+        if (cell.getAttribute("data-mine")=="false")
+        {
+          cell.setAttribute("data-mine","true");
+          m++;
+        }
+      }
+    }
 
+    if (minesToReplace>0) 
+    { 
+      //Reveal all adjacent cells as they do not have a mine
+      for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+      {
+        for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+        {
+          if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") 
+          {
+            grid.rows[i].cells[j].setAttribute("data-mine","false");
+          }
+        }
+      }
+      for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+      {
+        for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+        {
+            clickCell(grid.rows[i].cells[j]);
+        }
+      }
+    }
+
+      
+      mineCell.setAttribute("data-mine","false");
+      if (testMode) cell.innerHTML="X";
+    
+    
+}
 function checkLevelCompletion() {
   var levelComplete = true;
     for (var i=0; i<10; i++) {
@@ -186,11 +241,7 @@ function clickCell(cell) {
 
     if (firstClick==true)
     {
-      if (cell.getAttribute("data-mine")=="true")
-      {
-        replaceMine(cell);
-      }
-      firstClick=false;
+      replaceMine(cell);
     }
 
     if (cell.getAttribute("data-mine")=="true") {
@@ -222,37 +273,24 @@ function clickCell(cell) {
     }
   
     switch (mineCount) {
-      case 0:
-        cell.innerHTML=" ";
-        break;
-      case 1:
-        cell.style.color = '#3399ff';
-        break;
-      case 2:
-        cell.style.color = '#66ff99';
-        break;
-      case 3:
-        cell.style.color = '#ff6666';
-        break;
-      case 4:
-        cell.style.color = '#0033cc';
-        break;
-      case 5:
-        cell.style.color = '#cc0066';
-        break;
-      case 6:
-        cell.style.color = '#33cccc';
-        break;
-      case 7:
-        cell.style.color = ' #cccccc';
-        break;
-      case 8:
-        cell.style.color = '#cc33ff';
-        break;
+      case 0: cell.innerHTML=" ";           break;
+      case 1: cell.style.color = '#3399ff'; break;
+      case 2: cell.style.color = '#66ff99'; break;
+      case 3: cell.style.color = '#ff6666'; break;
+      case 4: cell.style.color = '#0033cc'; break;
+      case 5: cell.style.color = '#cc0066'; break;
+      case 6: cell.style.color = '#33cccc'; break;
+      case 7: cell.style.color = '#cccccc'; break;
+      case 8: cell.style.color = '#cc33ff'; break;
     }
     checkLevelCompletion();
   }
 }
 </script>
+<p>Controls:</p>
+<p>Left Click/Tap - Open Cell</p>
+<p>Right Click/Hold - Put the Flag</p>
+<p>--- ^_^ ---</p>
+<p>v1.02 - the beginning of the game got easier <br>(3x3 mine-free space guaranteed)</p>
 </body>
 </html>
