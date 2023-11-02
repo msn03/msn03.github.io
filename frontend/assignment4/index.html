@@ -3,16 +3,25 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <style>
+@font-face {
+  font-family: myFirstFont;
+  src: url(font/upheavtt.ttf);
+}
+
+div {
+  font-family: myFirstFont;
+}
+
 BODY {
   background: black;
   color: #DDDDDD;
-  font-family: courier new;
+  font-family: myFirstFont;
   text-align: center;
 }
 
 H1 {
   text-align: center;
-  font-size: 14pt;
+  font-size: 20pt;
   font-weight: normal;
 }
 #grid {
@@ -23,8 +32,9 @@ H1 {
 #grid TR TD{
   border:1px solid white;
   background: #999999;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
+  font-size: 16pt;
   text-align: center;
 }
 
@@ -37,10 +47,11 @@ H1 {
 }
 
 BUTTON {
-  margin: 12px;
+  margin: 20px;
 }
 </style>
 
+<script src="https://kit.fontawesome.com/d25d1fab93.js" crossorigin="anonymous"></script>
 </head>
 
 
@@ -55,9 +66,12 @@ BUTTON {
 
 
 <script>
-var grid = document.getElementById("grid");
-var testMode = false; //Turn this variable to true to see where the mines are
+    var grid = document.getElementById("grid");
+  var testMode = false; //Turn this variable to true to see where the mines are
+  var firstClick = true;
 generateGrid();
+
+
 
 function generateGrid() {
   //generate 10 by 10 grid
@@ -67,33 +81,89 @@ function generateGrid() {
     for (var j=0; j<10; j++) {
       cell = row.insertCell(j);
       cell.onclick = function() { clickCell(this); };
-      var mine = document.createAttribute("data-mine");       
-      mine.value = "false";             
+      cell.oncontextmenu = function ()
+      {
+        addFlag(this);
+        return false;     // cancel default menu
+      }
+      var mine = document.createAttribute("data-mine");
+      var flag = document.createAttribute("data-flag");
+      var open = document.createAttribute("data-open");         
+      mine.value = "false";
+      flag.value = "false";
+      open.value = "false";                 
       cell.setAttributeNode(mine);
+      cell.setAttributeNode(flag);
+      cell.setAttributeNode(open);
+      firstClick = true;
     }
   }
   addMines();
 }
 
+function addFlag(cell) 
+{
+  if (cell.getAttribute("data-open")=="false")
+  {
+    if (cell.getAttribute("data-flag")=="false")
+    {
+      cell.setAttribute("data-flag","true");
+      cell.innerHTML="<i class='fa-solid fa-flag fa-xs'></i>";
+    } 
+    else if (cell.getAttribute("data-flag")=="true")
+    {
+      cell.setAttribute("data-flag","false");
+      cell.innerHTML=" ";
+    }
+  }
+}
+
 function addMines() {
   //Add mines randomly
-  for (var i=0; i<20; i++) {
+  var i=0;
+  while (i<20) {
     var row = Math.floor(Math.random() * 10);
     var col = Math.floor(Math.random() * 10);
     var cell = grid.rows[row].cells[col];
-    cell.setAttribute("data-mine","true");
+    if (cell.getAttribute("data-mine")=="false")
+    {
+      cell.setAttribute("data-mine","true");
+      i++;
+    }
     if (testMode) cell.innerHTML="X";
   }
 }
+
 
 function revealMines() {
     //Highlight all mines in red
     for (var i=0; i<10; i++) {
       for(var j=0; j<10; j++) {
         var cell = grid.rows[i].cells[j];
-        if (cell.getAttribute("data-mine")=="true") cell.className="mine";
+        if (cell.getAttribute("data-mine")=="true") 
+        {
+          cell.className="mine";
+          cell.innerHTML="<i class='fa-solid fa-land-mine-on fa-xs'></i>";
+        }
       }
     }
+}
+
+function replaceMine(mine) {
+  //Replace mine if it's first click
+  mine.setAttribute("data-mine","false");
+  var i=0;
+  while (i<1) {
+    var row = Math.floor(Math.random() * 10);
+    var col = Math.floor(Math.random() * 10);
+    var cell = grid.rows[row].cells[col];
+    if (cell.getAttribute("data-mine")=="false")
+    {
+      cell.setAttribute("data-mine","true");
+      i++;
+    }
+    if (testMode) cell.innerHTML="X";
+  }
 }
 
 function checkLevelCompletion() {
@@ -111,30 +181,74 @@ function checkLevelCompletion() {
 
 function clickCell(cell) {
   //Check if the end-user clicked on a mine
-  if (cell.getAttribute("data-mine")=="true") {
-    revealMines();
-    alert("Game Over");
-  } else {
-    cell.className="clicked";
-    //Count and display the number of adjacent mines
-    var mineCount=0;
-    var cellRow = cell.parentNode.rowIndex;
-    var cellCol = cell.cellIndex;
-    //alert(cellRow + " " + cellCol);
-    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) {
-      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) {
-        if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") mineCount++;
+  
+  if (cell.getAttribute("data-flag")=="false") {
+
+    if (firstClick==true)
+    {
+      if (cell.getAttribute("data-mine")=="true")
+      {
+        replaceMine(cell);
       }
+      firstClick=false;
     }
-    cell.innerHTML=mineCount;
-    if (mineCount==0) { 
-      //Reveal all adjacent cells as they do not have a mine
+
+    if (cell.getAttribute("data-mine")=="true") {
+      revealMines();
+      alert("Game Over");
+    } else {
+      cell.setAttribute("data-open","true");
+      cell.className="clicked";
+      //Count and display the number of adjacent mines
+      var mineCount=0;
+      var cellRow = cell.parentNode.rowIndex;
+      var cellCol = cell.cellIndex;
+      //alert(cellRow + " " + cellCol);
       for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) {
         for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) {
-          //Recursive Call
-          if (grid.rows[i].cells[j].innerHTML=="") clickCell(grid.rows[i].cells[j]);
+          if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") mineCount++;
         }
       }
+      cell.innerHTML=mineCount;
+      if (mineCount==0) { 
+        //Reveal all adjacent cells as they do not have a mine
+        for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) {
+          for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) {
+            //Recursive Call
+            if (grid.rows[i].cells[j].innerHTML=="") clickCell(grid.rows[i].cells[j]);
+          }
+        } 
+      }
+    }
+  
+    switch (mineCount) {
+      case 0:
+        cell.innerHTML=" ";
+        break;
+      case 1:
+        cell.style.color = '#3399ff';
+        break;
+      case 2:
+        cell.style.color = '#66ff99';
+        break;
+      case 3:
+        cell.style.color = '#ff6666';
+        break;
+      case 4:
+        cell.style.color = '#0033cc';
+        break;
+      case 5:
+        cell.style.color = '#cc0066';
+        break;
+      case 6:
+        cell.style.color = '#33cccc';
+        break;
+      case 7:
+        cell.style.color = ' #cccccc';
+        break;
+      case 8:
+        cell.style.color = '#cc33ff';
+        break;
     }
     checkLevelCompletion();
   }
