@@ -1,0 +1,94 @@
+@font-face {
+    font-family: myFirstFont;
+    src: url(../font/upheavtt.ttf);
+  }
+  
+  .rainbow_text_animated {
+      background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow_animation 6s linear infinite;
+      background-size: 1800% 1800%;
+  
+  
+  -webkit-animation: rainbow 18s ease infinite;
+  -z-animation: rainbow 18s ease infinite;
+  -o-animation: rainbow 18s ease infinite;
+    animation: rainbow 18s ease infinite;}
+  
+  @-webkit-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-moz-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @-o-keyframes rainbow {
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  @keyframes rainbow { 
+      0%{background-position:0% 82%}
+      50%{background-position:100% 19%}
+      100%{background-position:0% 82%}
+  }
+  
+  
+  div {
+    font-family: myFirstFont;
+  }
+  .font2 {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  BODY {
+    background: black;
+    color: #DDDDDD;
+    font-family: myFirstFont;
+    text-align: center;
+      position:relative; 
+      background-image: url('../mine.gif');
+  }
+  
+  H1 {
+    text-align: center;
+    font-size: 20pt;
+    font-weight: normal;
+  }
+  #grid {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  #grid TR TD{
+    border:1px solid white;
+    background: #999999;
+    width: 24px;
+    height: 24px;
+    font-size: 16pt;
+    text-align: center;
+  }
+  
+  #grid TR TD.clicked {
+      background: #333333;
+  }
+  
+  #grid TR TD.mine-lose {
+      background: #b12e2e;
+  }
+  #grid TR TD.mine-win {
+    background: #35ad35;
+  }
+  
+  button {
+    margin: 20px;
+  }
+  .gameInfo
+  {
+    font-size: 16pt;
+  }
