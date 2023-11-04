@@ -68,7 +68,7 @@
   #grid TR TD{
     border:1px solid white;
     background: #999999;
-    width: 24px;
+    min-width: 24px;
     height: 24px;
     font-size: 16pt;
     text-align: center;

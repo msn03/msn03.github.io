@@ -20,8 +20,26 @@
     <i class="fa-solid fa-land-mine-on"></i>&nbsp;</i><span id="mines">000</span>
   </p>
   </div>
-  <button onclick="generateGrid();">Reset Grid</button>
-  
+  <span>
+  Difficulty:
+  <input type="radio" id="easy" name="difficulty" value="Easy" checked onchange="displayCustomPar(0)">
+  <label for="easy">Easy</label>
+  <input type="radio" id="medium" name="difficulty" value="Medium" onchange="displayCustomPar(0)">
+  <label for="medium">Medium</label>
+  <input type="radio" id="hard" name="difficulty" value="Hard" onchange="displayCustomPar(0)">
+  <label for="hard">Hard</label>
+  <input type="radio" id="custom" name="difficulty" value="Custom" onchange="displayCustomPar(1)">
+  <label for="custom">Custom</label>
+  <button onclick="generateGrid();">New Game</button>
+  </span><br>
+  <div id="customParameters" style="display: none;">
+  <label for="gHeight">Height (8-40):</label>
+  <input type="number" id="gHeight" name="gHeight" value="8" min="8" max="40">
+  <label for="gWidth">Width (8-40):</label>
+  <input type="number" id="gWidth" name="gWidth" value="8" min="8" max="40">
+  <label for="gMines">Mines (&lt;70% of grid, 10-999):</label>
+  <input type="number" id="gMines" name="gMines" value="10" min="10" max="999">
+  </div><br>
   <p>Controls:</p>
   <p>Left Click/Tap - Open Cell</p>
   <p>Right Click/Hold - Put the Flag</p>
@@ -29,6 +47,7 @@
   <p>v1.02 - the beginning of the game got easier <br>(3x3 mine-free space guaranteed)</p>
   <p>v1.03 - small visual update</p>
   <p>v1.04 - stopwatch and bomb counter was added. <br>fixed some bugs (getting less mines than intended)</p>
+  <p>v1.05 - introducing 4 difficulties: easy, medium, hard and custom</p>
 
 
 
@@ -44,6 +63,75 @@ var appendSeconds = document.getElementById("seconds")
 var appendMines = document.getElementById("mines")
 var Interval; 
 
+var gridWidth;
+var gridHeight;
+var minesToPlant;
+
+function displayCustomPar(i) {
+  var x = document.getElementById("customParameters");
+  if (i === 1) {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+function getDifficulty() {
+    var difficulty = document.getElementsByName('difficulty');
+    if (difficulty[0].checked)
+    {
+      gridWidth=9;
+      gridHeight=9;
+      minesToPlant=10;
+    }
+    if (difficulty[1].checked)
+    {
+      gridWidth=16;
+      gridHeight=16;
+      minesToPlant=40;
+    }
+    if (difficulty[2].checked)
+    {
+      gridWidth=30;
+      gridHeight=16;
+      minesToPlant=99;
+    }
+    if (difficulty[3].checked)
+    {
+      gridWidth=document.getElementById("gWidth").value;
+      gridHeight=document.getElementById("gHeight").value;
+      minesToPlant=document.getElementById("gMines").value;
+      if (gridWidth<8) {
+        gridWidth=8;
+        document.getElementById("gWidth").value=8;
+      }
+      if (gridWidth>40) {
+        gridWidth=40;
+        document.getElementById("gWidth").value=40;
+      }
+      if (gridHeight<8) {
+        gridHeight=8;
+        document.getElementById("gHeight").value=8;
+      }
+      if (gridHeight>40) {
+        gridHeight=40;
+        document.getElementById("gHeight").value=40;
+      }
+      if (minesToPlant<10) {
+        minesToPlant=10;
+        document.getElementById("gMines").value=10;
+      }
+      if(minesToPlant/(gridWidth*gridWidth)>0.7)
+      {
+        alert("Too many mines! Number of mines will be reduced to max. possible for this area - "+Math.floor(gridWidth*gridHeight*0.7));
+        minesToPlant=Math.floor(gridWidth*gridHeight*0.7);
+        document.getElementById("gMines").value=Math.floor(gridWidth*gridHeight*0.7);
+      }
+      
+    }
+    
+}
+
 function startTimer () {
   seconds++; 
   if (seconds<1000) {
@@ -52,7 +140,7 @@ function startTimer () {
     } else if(seconds<100){
       appendSeconds.innerHTML = "0"+seconds;
     } else {
-      appendSeconds.innerHTML = "0"+seconds;
+      appendSeconds.innerHTML = seconds;
     }
   }
 }
@@ -64,7 +152,7 @@ function countMines(mines) {
     } else if(mines<100){
       appendMines.innerHTML = "0"+mines;
     } else {
-      appendMines.innerHTML = "0"+mines;
+      appendMines.innerHTML = mines;
     }
   }
 }
@@ -86,15 +174,16 @@ function showMines() {
 
 function generateGrid() {
 //generate 10 by 10 grid
+getDifficulty();
 grid.innerHTML="";
 gameEnded=false;
 mines = "000";
 clearInterval(Interval);
   seconds = "000";
   appendSeconds.innerHTML = seconds;
-for (var i=0; i<10; i++) {
+for (var i=0; i<gridHeight; i++) {
   row = grid.insertRow(i);
-  for (var j=0; j<10; j++) {
+  for (var j=0; j<gridWidth; j++) {
     cell = row.insertCell(j);
     cell.onclick = function() { clickCell(this); };
     cell.oncontextmenu = function ()
@@ -145,9 +234,9 @@ function addFlag(cell) {
 function addMines() {
 //Add mines randomly
 var i=0;
-while (i<20) {
-    var row = Math.floor(Math.random() * 10);
-    var col = Math.floor(Math.random() * 10);
+while (i<minesToPlant) {
+    var row = Math.floor(Math.random() * gridHeight);
+    var col = Math.floor(Math.random() * gridWidth);
     var cell = grid.rows[row].cells[col];
     if (cell.getAttribute("data-mine")=="false")
     {
@@ -165,8 +254,8 @@ function revealMines(x) {
   clearInterval(Interval);
   gameEnded=true;
   //Highlight all mines in red
-  for (var i=0; i<10; i++) {
-    for(var j=0; j<10; j++) {
+  for (var i=0; i<gridHeight; i++) {
+    for(var j=0; j<gridWidth; j++) {
       var cell = grid.rows[i].cells[j];
       if (cell.getAttribute("data-mine")=="true") 
       {
@@ -190,9 +279,9 @@ var m=0;
   var cellRow = mineCell.parentNode.rowIndex;
   var cellCol = mineCell.cellIndex;
   
-  for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+  for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
   {
-    for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+    for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
     {
       if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") minesToReplace++;
     }
@@ -201,9 +290,9 @@ var m=0;
   {
     // alert(minesToReplace+" mines to replace; m="+m);
 
-    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
     {
-      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
       {
           grid.rows[i].cells[j].setAttribute("data-mine","true");
       }
@@ -212,8 +301,8 @@ var m=0;
     while (m<minesToReplace) 
     {
       // alert("m="+m);
-      var row = Math.floor(Math.random() * 10);
-      var col = Math.floor(Math.random() * 10);
+      var row = Math.floor(Math.random() * gridHeight);
+      var col = Math.floor(Math.random() * gridWidth);
       var cell = grid.rows[row].cells[col];
       if (cell.getAttribute("data-mine")=="false")
       {
@@ -226,16 +315,16 @@ var m=0;
   if (minesToReplace>0) 
   { 
     //Reveal all adjacent cells as they do not have a mine
-    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
     {
-      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
       {
           grid.rows[i].cells[j].setAttribute("data-mine","false");
       }
     }
-    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) 
+    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
     {
-      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) 
+      for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
       {
           clickCell(grid.rows[i].cells[j]);
       }
@@ -249,8 +338,8 @@ var m=0;
 }
 function checkLevelCompletion() {
 var levelComplete = true;
-  for (var i=0; i<10; i++) {
-    for(var j=0; j<10; j++) {
+  for (var i=0; i<gridHeight; i++) {
+    for(var j=0; j<gridWidth; j++) {
       if ((grid.rows[i].cells[j].getAttribute("data-mine")=="false") && (grid.rows[i].cells[j].innerHTML=="")) levelComplete=false;
     }
 }
@@ -285,16 +374,16 @@ function clickCell(cell) {
         var cellRow = cell.parentNode.rowIndex;
         var cellCol = cell.cellIndex;
         //alert(cellRow + " " + cellCol);
-        for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) {
-          for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) {
+        for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) {
+          for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) {
             if (grid.rows[i].cells[j].getAttribute("data-mine")=="true") mineCount++;
           }
         }
         cell.innerHTML=mineCount;
         if (mineCount==0) { 
           //Reveal all adjacent cells as they do not have a mine
-          for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,9); i++) {
-            for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,9); j++) {
+          for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) {
+            for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) {
               //Recursive Call
               if (grid.rows[i].cells[j].innerHTML=="") clickCell(grid.rows[i].cells[j]);
             }
