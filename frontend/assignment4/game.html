@@ -26,8 +26,8 @@
   .select-style {
     display: none;
   }
-  .customParam {
-      width: auto;
+  .customParam, .hud {
+      display: inline-block;
     }
   @media screen and (max-width: 600px) {
     .radio-style {
@@ -37,6 +37,11 @@
         display: inline-block;
     }
     .customParam {
+      width: 100%;
+    }
+  }
+  @media screen and (max-width: 400px) {
+    .hud {
       width: 100%;
     }
   }
@@ -60,9 +65,9 @@
 
   <div>
   <p class="gameInfo">
-    <i class="fa-regular fa-clock">&nbsp;</i><span id="seconds">000</span> 
-    <button onclick="generateGrid();" class="button">New Game</button>
-    <i class="fa-solid fa-land-mine-on"></i>&nbsp;</i><span id="mines">000</span>
+    <div class="hud"><i class="fa-regular fa-clock">&nbsp;</i><span id="seconds">000</span> </div>
+    <div class="hud"><button onclick="generateGrid();" class="button">New Game</button></div>
+    <div class="hud"><i class="fa-solid fa-land-mine-on"></i>&nbsp;</i><span id="mines">000</span></div>
   </p>
   </div>
   
