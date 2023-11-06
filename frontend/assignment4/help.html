@@ -1,82 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>minesweeper - help</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link type="text/css" rel="stylesheet" href="css/minesweeper.css">
+<link type="text/css" rel="stylesheet" href="css/minesweeper++.css">
 <script src="https://kit.fontawesome.com/d25d1fab93.js" crossorigin="anonymous"></script>
-
-
-<style>
-  * {box-sizing:border-box}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 500px;
-  position: relative;
-  margin: auto;
-}
-
-/* Hide the images by default */
-.mySlides {
-  display: none;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Caption text */
-.text {
-  font-size: 20px;
-  padding: 8px 12px;
-  position: relative;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-
-/* Number text (1/3 etc) */
-.numbertext {
-  font-size: 16px;
-  padding: 8px 12px;
-  position: relative;
-  top: 0;
-}
-
-
-
-/* Fading animation */
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {opacity: .4}
-  to {opacity: 1}
-}
-</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -84,7 +14,7 @@
   <div id="shadowBox">
     <H1 class="rainbow rainbow_text_animated">Minesweeper</H1>
   </div>
-  
+
   <p class="contrast">Controls:</p>
   <p>Left Click/Tap - Open Cell</p>
   <p>Right Click/Hold - Put the Flag</p>
@@ -93,7 +23,6 @@
   <p>--- <span class="contrast">Hints</span> ---</p>
 
   <div class="slideshow-container">
-
     <!-- Full-width images with number and caption text -->
     <div class="mySlides fade">
       <img src="img/1.png">
@@ -125,11 +54,9 @@
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
   <br>
-  
 
-
-  <script>
-    let slideIndex = 1;
+<script>
+let slideIndex = 1;
 showSlides(slideIndex);
 
 // Next/previous controls
@@ -157,6 +84,6 @@ function showSlides(n) {
   slides[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " active";
 }
-  </script>
+</script>
 </body>
 </html>

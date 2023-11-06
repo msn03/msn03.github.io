@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>minesweeper - home</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link type="text/css" rel="stylesheet" href="css/minesweeper.css">
+<link type="text/css" rel="stylesheet" href="css/minesweeper++.css">
 <script src="https://kit.fontawesome.com/d25d1fab93.js" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script>
-  $(document).ready(function(){
+$(document).ready(function(){
   $("#updateHead").mouseover(function(){
     $("#updateList").slideDown("slow");
     $("#updateHead").text($("#updateHead").text().replace("&lt; Latest Uasdasdpdates &gt;", "&gt; Latest Updates &lt;"));
@@ -18,11 +20,6 @@
   });
 });
   </script>
-<style>
-.hidden {
-  display: none;
-}
-</style>
 </head>
 
 <body>
@@ -31,22 +28,22 @@
     <H1 class="rainbow rainbow_text_animated">Minesweeper</H1>
   </div>
   <img src="img/game.png">
-  <p>The game features a grid of clickable tiles, with hidden "mines" scattered throughout the board.<br>
-     The objective is to clear the board without detonating any mines, <br>
-     with help from clues about the number of neighboring mines in each field.
+  <p>
+    The game features a grid of clickable tiles, with hidden "mines" scattered throughout the board.<br>
+    The objective is to clear the board without detonating any mines, <br>
+    with help from clues about the number of neighboring mines in each field.
   </p>
   <button onclick="window.location.href='game.html';" class="button">Start Game</button>
   <button onclick="window.location.href='help.html';" class="button">How to Play?</button>
   <br>
   <p id="updateHead" class="contrast" style="padding: 5px;">&lt; Latest Updates &gt;</p>
   <div id="updateList" class="hidden">
-  <p><span class="contrast">v1.02</span> - the beginning of the game got easier <br>(3x3 mine-free space guaranteed)</p>
-  <p><span class="contrast">v1.03</span> - small visual update</p>
-  <p><span class="contrast">v1.04</span> - stopwatch and bomb counter was added. <br>fixed some bugs (getting less mines than intended)</p>
-  <p><span class="contrast">v1.05</span> - introducing 4 difficulties: easy, medium, hard and custom</p>
-  <p><span class="contrast">v1.06</span> - new home and help page. more visual changes.</p>
-</div>
-
+    <p><span class="contrast">v1.02</span> - the beginning of the game got easier <br>(3x3 mine-free space guaranteed)</p>
+    <p><span class="contrast">v1.03</span> - small visual update</p>
+    <p><span class="contrast">v1.04</span> - stopwatch and bomb counter was added. <br>fixed some bugs (getting less mines than intended)</p>
+    <p><span class="contrast">v1.05</span> - introducing 4 difficulties: easy, medium, hard and custom</p>
+    <p><span class="contrast">v1.06</span> - new home and help page. more visual changes.</p>
+  </div>
 
 </body>
 </html>
