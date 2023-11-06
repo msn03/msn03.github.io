@@ -1,5 +1,9 @@
+var winSound = document.getElementById("soundWin"); 
 var gameOverSound = document.getElementById("soundBoom"); 
 
+function playWinSound() { 
+    winSound.play(); 
+}
 function playGameOverSound() { 
     gameOverSound.play(); 
 }
@@ -170,7 +174,10 @@ function revealMines(x) {
             if (cell.getAttribute("data-mine")=="true") 
             {
                 if (x==1)
-                cell.className="mine-win";
+                {
+                    playWinSound();
+                    cell.className="mine-win";
+                }
                 else
                 {
                     playGameOverSound();

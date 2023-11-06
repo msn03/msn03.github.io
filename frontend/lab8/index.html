@@ -19,84 +19,59 @@
     <link type="text/css" rel="stylesheet" href="../../css/style.css">
 
 <script>
-    function isInRange() {
-        let t1n1 = document.forms["task1"]["t1num1"].value;
-        let t1n2 = document.forms["task1"]["t1num2"].value;
-        if ((50 <= t1n1 && t1n1 <= 99) || (50 <= t1n2 && t1n2 <= 99))
-        {
-            document.getElementById('output1').innerHTML = "TRUE";
-        }
-        else
-        {
-            document.getElementById('output1').innerHTML = "FALSE";
-        }
-    }
+    function findLongestWord(str) {
+        var wordArr = str.split(' ');
+        var longestWord = '';
 
-    function doesContain() {
-        let stringToCount = document.forms["task2"]["t2str"].value;
-        let letterToFind = document.forms["task2"]["t2letter"].value;
-        let partOfString = stringToCount.slice(1, 4);
-        if (partOfString.includes(letterToFind))
-        {
-            document.getElementById('output2').innerHTML = "TRUE";
-        }
-        else
-        {
-            document.getElementById('output2').innerHTML = "FALSE";
-        }
-    }
-
-    function updArray() {
-        var source = document.forms["task3"]["t3num"].value;
-        var arrayNum = source.split(" ");
-        var maxValue = Math.max(arrayNum[0], arrayNum[arrayNum.length - 1]);
-        for (var i = 0; i < arrayNum.length; i++) {
-            arrayNum[i] = maxValue;
-        }
-        document.getElementById('output3').innerHTML = arrayNum;
-    }
-
-    function replaceChar() {
-        var sourceStr = document.forms["task4"]["t4str"].value;
-        var replacedStr = '';
-        for (var i = 0; i < sourceStr.length; i++) 
-        {
-            var charCode = sourceStr.charCodeAt(i);
-            if (charCode == 122)                            // z
-            {
-                replacedStr += String.fromCharCode(97);     // z to a
-            } 
-            else if (charCode == 90)                        // Z
-            {
-                replacedStr += String.fromCharCode(65);     // Z to A
-            } 
-            else if ((charCode >= 65 && charCode <= 89) || (charCode >= 97 && charCode <= 121)) 
-            {
-                replacedStr += String.fromCharCode(charCode + 1);
-            } 
-            else 
-            {
-                replacedStr += sourceStr.charAt(i);
+        for (var i = 0; i < wordArr.length; i++) {
+            if (wordArr[i].length > longestWord.length) {
+                longestWord = wordArr[i];
             }
         }
-        document.getElementById('output4').innerHTML = replacedStr;
+        longestWord=longestWord.charAt(0).toUpperCase() + longestWord.slice(1);
+        document.getElementById('output1').innerHTML = longestWord;
     }
 
-    function sortByLength() {
-        let strToSort = document.forms["task5"]["t5str"].value;
-        let arrToSort = strToSort.split(" ");
-        arrToSort.sort(function(a, b) 
-        {
-            if (a.length == b.length) 
-            {
-                return 0;
-            }
-            return a.length - b.length;
-        });
 
-        document.getElementById('output5').innerHTML = arrToSort;
+    function findNums(num) {
+        var numArr = num.split(' ');
+        numArr.sort(function(a, b) { return a - b; });
+
+        if (numArr.length < 2) {
+            document.getElementById('output2').innerHTML = "array is too small";
+        } else {
+            document.getElementById('output2').innerHTML = numArr[1] + ',' + numArr[numArr.length - 2];
+        }
+    }
+
+    function sumArray(num) {
+        var numArr = num.split(' ');
+        var sum = parseInt(0, 10);
+        
+        for (var i = 0; i < numArr.length; i++) {
+            sum += parseInt(numArr[i], 10);
+        }
+        document.getElementById('output3').innerHTML = sum;
+    }
+
+    function isEven(num) {
+        if (num % 2 == 0) {
+            document.getElementById('output4').innerHTML = "is Even? - " + true;
+        } else
+            document.getElementById('output4').innerHTML = "is Even? - " + false;
+    }
+    
+    function findMaxNum(num) {
+        var numArr = num.split(' ');
+        document.getElementById('output5').innerHTML = Math.max.apply(null, numArr);
     }
 </script>
+
+<style>
+    a.active{
+        font-weight: bold;
+    }
+</style>
 
 </head>
 <body>
@@ -108,7 +83,7 @@
                         <div class="col-12 col-xl-12">
                             <div class="card card-tertiary">
                                 <div class="card-header text-left">
-                                    <span>Lab 7 (FRONTEND)</span>
+                                    <span>Lab 8 (FRONTEND)</span>
                                 </div>
                                 <div class="card-body">
 
@@ -141,11 +116,11 @@
                                         <div class="tab-pane show active" id="task1" role="tabpanel"
                                             aria-labelledby="task1-tab">
                                             <div>
-                                                <h5>Task 1. Check whether two entered integer values are in the range 50-99</h5>
+                                                <h5>Task 1. function that accepts a string as a parameter and finds the longest word within the string.</h5>
                                                 <form name="task1">
-                                                    <input type="number" name="t1num1" placeholder="enter the 1st number">
-                                                    <input type="number" name="t1num2" placeholder="enter the 2nd number">
-                                                    <button type="button" onclick="return isInRange()"> Check </button>
+                                                    <input id="t1" type="text" name="t1str" placeholder="enter the string">
+                                                    <button type="button" onclick="findLongestWord(document.forms['task1']['t1str'].value)"> Show Result </button>
+                                                    <i><b>HINT:</b> separate elements with space</i>
                                                 </form>
                                                 <table>
                                                     <tr>
@@ -157,11 +132,11 @@
                                         </div>
                                         <div class="tab-pane" id="task2" role="tabpanel" aria-labelledby="task2-tab">
                                             <div>
-                                                <h5>Task 2. Check whether a specified character exists between the 2nd and 4th positions in a given string.</h5>
+                                                <h5>Task 2. function that takes an array of numbers and finds the second lowest and second greatest numbers, respectively.</h5>
                                                 <form name="task2">
-                                                    <input type="text" name="t2str" placeholder="enter the string">
-                                                    <input type="text" name="t2letter" placeholder="enter the letter" maxlength="1"  size="10">
-                                                    <button type="button" onclick="return doesContain()"> Check </button>
+                                                    <input type="text" name="t2num" placeholder="enter list of numbers">
+                                                    <button type="button" onclick="findNums(document.forms['task2']['t2num'].value)"> Show Result </button>
+                                                    <i><b>HINT:</b> separate elements with space</i>
                                                 </form>
                                                 <table>
                                                     <tr>
@@ -173,11 +148,11 @@
                                         </div>
                                         <div class="tab-pane" id="task3" role="tabpanel" aria-labelledby="task3-tab">
                                             <div>
-                                                <h5>Task 3. Find the largest value of array and set other elements to that value.</h5>
+                                                <h5>Task 3. program that computes the sum of an array of integers. </h5>
                                                 <form name="task3">
                                                     <input type="text" name="t3num" placeholder="enter list of numbers">
                                                 
-                                                    <button type="button" onclick="return updArray()"> Update </button>
+                                                    <button type="button" onclick="sumArray(document.forms['task3']['t3num'].value)"> Show Result </button>
                                                     <i><b>HINT:</b> separate elements with space</i>
                                                 </form>
                                                 <table>
@@ -190,10 +165,10 @@
                                         </div>
                                         <div class="tab-pane" id="task4" role="tabpanel" aria-labelledby="task4-tab">
                                             <div>
-                                                <h5>Task 4. Replace each character in a given string with the next in the English alphabet.</h5>
+                                                <h5>Task 4. program that checks whether a number is even or not.</h5>
                                                 <form name="task4">
-                                                    <input type="text" name="t4str" placeholder="enter the string">
-                                                    <button type="button" onclick="return replaceChar()"> Replace chars! </button>
+                                                    <input type="number" name="t4num" placeholder="enter the number">
+                                                    <button type="button" onclick="isEven(document.forms['task4']['t4num'].value)"> Show Result </button>
                                                 </form>
                                                 <table>
                                                     <tr>
@@ -205,10 +180,10 @@
                                         </div>
                                         <div class="tab-pane" id="task5" role="tabpanel" aria-labelledby="task5-tab">
                                             <div>
-                                                <h5>Task 5. Sort the strings of a given array of strings in order of increasing length.</h5>
+                                                <h5>Task 5. function that finds the highest value in an array.</h5>
                                                 <form name="task5">
-                                                    <input type="text" name="t5str" placeholder="enter the strings">
-                                                    <button type="button" onclick="return sortByLength()"> Sort </button>
+                                                    <input type="text" name="t5num" placeholder="enter the numbers">
+                                                    <button type="button" onclick="findMaxNum(document.forms['task5']['t5num'].value)"> Show Result </button>
                                                     <i><b>HINT:</b> separate elements with space</i>
                                                 </form>
                                                 <table>
@@ -222,10 +197,6 @@
                                     </div>
 
                                     </div>
-                                    
-                                    
-                                    
-                                    
                                     
                                 </div>
                             </div>
