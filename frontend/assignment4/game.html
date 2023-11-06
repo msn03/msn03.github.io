@@ -26,13 +26,18 @@
   .select-style {
     display: none;
   }
-
+  .customParam {
+      width: auto;
+    }
   @media screen and (max-width: 600px) {
     .radio-style {
         display: none;
     }
     .select-style {
         display: inline-block;
+    }
+    .customParam {
+      width: 100%;
     }
   }
   </style>
@@ -62,7 +67,7 @@
   </div>
   
   <span class="contrast">Difficulty:</span>
-  <select class="select-style" onchange="difficultyNotification()">
+  <select class="select-style" id="difficultySelect" onchange="syncRadio(this.selectedIndex); difficultyNotification(); if(this.selectedIndex==3){displayCustomPar(1);}else{displayCustomPar(0);}">
     <option value="Easy">Easy</option>
     <option value="Medium">Medium</option>
     <option value="Hard">Hard</option>
@@ -70,37 +75,40 @@
   </select>
 
   <div class="radio-style tooltip">
-    <input type="radio" id="easy" name="difficulty" value="Easy" checked onchange="displayCustomPar(0); difficultyNotification()">
+    <input type="radio" id="easy" name="difficulty" value="Easy" checked onchange="syncSelect(this.value); displayCustomPar(0); difficultyNotification()">
     <label for="easy">Easy</label>
     <span class="tooltiptext">Grid: 9x9 Mines: 10</span>
   </div>
   <div class="radio-style tooltip"> 
-    <input type="radio" id="medium" name="difficulty" value="Medium" onchange="displayCustomPar(0); difficultyNotification()">
+    <input type="radio" id="medium" name="difficulty" value="Medium" onchange="syncSelect(this.value); displayCustomPar(0); difficultyNotification()">
     <label for="medium">Medium</label>
     <span class="tooltiptext">Grid: 16x16 Mines: 40</span>
   </div>
   <div class="radio-style tooltip">
-    <input type="radio" id="hard" name="difficulty" value="Hard" onchange="displayCustomPar(0); difficultyNotification()">
+    <input type="radio" id="hard" name="difficulty" value="Hard" onchange="syncSelect(this.value); displayCustomPar(0); difficultyNotification()">
     <label for="hard">Hard</label>
     <span class="tooltiptext">Grid: 30x16 Mines: 99</span>
   </div>
   <div class="radio-style tooltip">
-    <input type="radio" id="custom" name="difficulty" value="Custom" onchange="displayCustomPar(1); difficultyNotification()">
+    <input type="radio" id="custom" name="difficulty" value="Custom" onchange="syncSelect(this.value); displayCustomPar(1); difficultyNotification()">
     <label for="custom">Custom</label><br>
     <span class="tooltiptext">All Custom</span>
   </div>
   
   <div id="customParameters" style="display: none;">
     <p class="contrast">Custom Parameters:</p>
-
-    <label for="gHeight"><span class="contrast">Height</span> (8-40):</label>
-    <input type="number" id="gHeight" name="gHeight" value="8" min="8" max="40">
-
-    <label for="gWidth"><span class="contrast">Width</span> (8-40):</label>
-    <input type="number" id="gWidth" name="gWidth" value="8" min="8" max="40">
-
-    <label for="gMines"><span class="contrast">Mines</span> (&lt;70% of grid, 10-999):</label>
-    <input type="number" id="gMines" name="gMines" value="10" min="10" max="999">
+    <div class="customParam">
+      <label for="gHeight"><span class="contrast">Height</span> (8-40):</label>
+      <input type="number" id="gHeight" name="gHeight" value="8" min="8" max="40">
+    </div>
+    <div class="customParam">
+      <label for="gWidth"><span class="contrast">Width</span> (8-40):</label>
+      <input type="number" id="gWidth" name="gWidth" value="8" min="8" max="40">
+    </div>
+    <div class="customParam">
+      <label for="gMines"><span class="contrast">Mines</span> (&lt;70% of grid, 10-999):</label>
+      <input type="number" id="gMines" name="gMines" value="10" min="10" max="999">
+    </div>
   </div>
 
   <br>
@@ -121,5 +129,8 @@
   <div id="msgLose" class="snackbar lose"><span class="contrast">Game Over!</span> Better luck next time!</div>
 
 <script src="js/gamelogic.js"></script>
+<script>
+  
+</script>
 </body>
 </html>

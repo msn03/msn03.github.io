@@ -339,13 +339,34 @@ function getDifficulty() {
             minesToPlant=10;
             document.getElementById("gMines").value=10;
         }
-        var ratio=minesToPlant/(griWidth*gridHeight);
+        var ratio=minesToPlant/(gridWidth*gridHeight);
         if(ratio>0.7)
         {
             minesToPlant=Math.floor(gridWidth*gridHeight*0.7);
             document.getElementById("gMines").value=Math.floor(gridWidth*gridHeight*0.7);
             alert("Too many mines! Number of mines will be reduced to max. possible for this area - "+Math.floor(gridWidth*gridHeight*0.7));
         }
+    }
+}
+
+function syncRadio(index)
+{
+    switch (index)
+    {
+        case 0: document.getElementById("easy").checked = true;   break;
+        case 1: document.getElementById("medium").checked = true; break;
+        case 2: document.getElementById("hard").checked = true;   break;
+        case 3: document.getElementById("custom").checked = true; break;
+    }
+}
+function syncSelect(id)
+{
+    switch (id)
+    {
+        case "Easy":    document.getElementById("difficultySelect").selectedIndex = 0;  break;
+        case "Medium":  document.getElementById("difficultySelect").selectedIndex = 1;  break;
+        case "Hard":    document.getElementById("difficultySelect").selectedIndex = 2;  break;
+        case "Custom":  document.getElementById("difficultySelect").selectedIndex = 3;  break;
     }
 }
 
@@ -374,7 +395,7 @@ function countMines(mines)
 {
     if (mines<1000) 
     {
-        if(seconds==0)
+        if(mines==0)
         {
             appendMines.innerHTML = "000";
         } else if(mines<10)
