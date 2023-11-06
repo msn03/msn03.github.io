@@ -42,6 +42,24 @@
   div {
     font-family: myFirstFont;
   }
+  .button {
+    background-color: #000000;
+    font-family: myFirstFont;
+    border: none;
+    color: #ffe055;
+    border: 2px solid #ffe055;
+    border-radius: 8px;
+    padding: 2px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 10px;
+    cursor: pointer;
+  }
+  .contrast {
+    color: #ffe055;
+  }
   .font2 {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
@@ -63,6 +81,7 @@
   #grid {
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
   }
   
   #grid TR TD{
@@ -77,9 +96,16 @@
   #grid TR TD.clicked {
       background: #333333;
   }
-  
+ 
+  #grid TR TD.mine-triggered {
+    background: #c0aa4a;
+}
   #grid TR TD.mine-lose {
       background: #b12e2e;
+      
+  }
+  #grid.gameOver {
+    cursor: not-allowed;
   }
   #grid TR TD.mine-win {
     background: #35ad35;
@@ -92,3 +118,86 @@
   {
     font-size: 16pt;
   }
+
+
+
+  .snackbar {
+    visibility: hidden; /* Hidden by default. Visible on click */
+    min-width: 250px; /* Set a default minimum width */
+    margin-left: -125px; /* Divide value of min-width by 2 */
+    background-color: #282828; /* Black background color */
+    text-align: center; /* Centered text */
+    border-radius: 2px; /* Rounded borders */
+    padding: 16px; /* Padding */
+    position: fixed; /* Sit on top of the screen */
+    z-index: 1; /* Add a z-index if needed */
+    left: 45%; /* Center the snackbar */
+    bottom: 30px; /* 30px from the bottom */
+  }
+
+  .win {
+    background-color: #35ad35;
+  }
+  .lose {
+    background-color: #b12e2e;
+  }
+  
+  /* Show the snackbar when clicking on a button (class added with JavaScript) */
+  .snackbar.show {
+    visibility: visible; /* Show the snackbar */
+    /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+    However, delay the fade out process for 2.5 seconds */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  }
+  
+  /* Animations to fade the snackbar in and out */
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #292929;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 150%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+
