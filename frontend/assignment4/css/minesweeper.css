@@ -98,3 +98,11 @@ button {
 .lose {
   background-color: #b12e2e;
 }
+
+.unselectable {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
