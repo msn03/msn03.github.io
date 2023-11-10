@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>COOLEST WEBPAGE EVER</title>
+    <title>Minesweeper | With Browser</title>
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
@@ -23,50 +23,35 @@
 <body>
     <main>
         <!-- Hero -->
-        <section class="section section-lg bg-secondary overflow-hidden z-2">
-            <div class="container z-2">
-                <div class="row justify-content-center pt-6 pt-md-5 pb-0 mb-2">
-                    <div class="col-12 col-xl-7">
-                        <div class="card card-tertiary">
-                            <div class="card-header text-left">
-                                <span>ABOUT ME</span>
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Hi, i'm rassoln1k or a.k.a. masyan. i started making this site during a boring DBMS lecture, 
-                                    and to show off to my groupmate Max. he's gonna be mad lol
-                                </p>
-                                <p class="card-text">this website is gonna be my experimental playground, where i can do some random stuff<br>
-                                    if i create lil webgames, they will be uploaded here.
-                                </p>
-                                <p class="card-text">here u can check one of my profiles (super cool)</p>
-                                <div class="d-flex mt-3">
-                                    <a href="https://www.youtube.com/channel/UCFHuOOuXxrjs8H48QwSg19g" target="_blank" class="btn btn-sm mb-2 mb-lg-0 mr-2 btn-primary border-dark font-base" role="button"><span class="btn-text">YouTUBE</span></a>
-                                    <a href="https://www.instagram.com/memasyan/" target="_blank" class="btn btn-sm mb-2 mb-lg-0 mr-2 btn-primary" role="button"><span class="btn-text">Instagram</span></a>
-                                    <a href="https://t.me/+dBJj8S4i-zQyNDZi" target="_blank" class="btn btn-sm mb-2 mb-lg-0 mr-2 btn-primary" role="button"><span class="btn-text">Telegram</span></a>
-                                    <a href="https://github.com/msn03" target="_blank" class="btn btn-sm mb-2 mb-lg-0 mr-2 btn-primary" role="button"><span class="btn-text">Github</span></a>
-                                    
+            <section class="section section-lg bg-secondary overflow-hidden z-2">
+                <div class="container z-2">
+                    <div class="row justify-content-center ">
+                        <div class="col-12 col-xl-12">
+                            <div class="card card-tertiary">
+                                <div class="card-header text-left">
+                                    <span>Assignment 4. (FRONTEND)</span>
                                 </div>
-                                <hr>
-                                <b>What's new?</b>
-                                <div class="card-body  bg-white" style="overflow:auto; height:150px;">
-                                    <p class="card-text">[21.05.2023] - Website is published</p>
-                                    <p class="card-text">[27.09.2023] - I started to upload tasks and assignments from FrontEnd Courses here</p>
-                                    <p class="card-text">[31.10.2023] - 7 labs and 3 assignments were uploaded and they got a uniform style as well (these pages are called as browser.html).</p>
-                                    <p class="card-text">[2.11.2023] - Minesweeper game was uploaded (part of 4th assignment from frontend courses).</p>
-                                    <p class="card-text">[11.11.2023] - Structure of website was changed. Supports rensponsive design</p>
+                                <div class="d-flex mx-2 mt-2">
+                                    <button class="btn btn-primary" onclick="window.location.href='/content.html';"><i class="fa-solid fa-arrow-left"></i></button>
+                                    <button class="btn btn-primary" onclick="location.reload();"><i class="fa-sharp fa-solid fa-rotate-right"></i></button>
+                                    <button class="btn btn-primary" onclick="window.location.href='index.html';">Open index.html</button>
                                 </div>
-                            </div>
-                            
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-    </main>
+                                <div class="card-body" style="height:520px;">
+                                        <iframe src="index.html" class="w-100 h-100" title="description">
 
-    <footer>
+                                        
+                                    </iframe>
+
+
+
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </section>
+      </main> 
+      <footer>
         <nav id="navbar-footer"
             class="navbar navbar-main navbar-expand-lg navbar-dark justify-content-between navbar-footer">
             <ul class="navbar-nav navbar-nav-hover flex-row align-items-center">
@@ -125,7 +110,6 @@
     <!-- pixel JS -->
     <script src="/js/javascript.js"></script>
     <script src="/js/myJS.js"></script>
-
 </body>
 
 </html>

@@ -435,7 +435,7 @@ function winNotification()
     var y = document.getElementById("msgWin");
     document.getElementById("timeSpent").innerHTML =seconds;
     // Add the "show" class to DIV
-    y.className = y.className+" show";
+    y.className = y.className+" show win";
     // After 3 seconds, remove the show class from DIV
     setTimeout(function(){ y.className = y.className.replace("show", ""); }, 3000);
 }
@@ -444,7 +444,7 @@ function loseNotification()
     // Get the snackbar DIV
     var z = document.getElementById("msgLose");
     // Add the "show" class to DIV
-    z.className = z.className+" show";
+    z.className = z.className+" show lose";
     // After 3 seconds, remove the show class from DIV
     setTimeout(function(){ z.className = z.className.replace("show", ""); }, 3000);
 }
