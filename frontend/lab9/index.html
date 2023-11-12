@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>COOLEST WEBPAGE EVER</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Bootstrap CSS -->
+    <link type="text/css" rel="stylesheet" href="../../bootstrap.min.css">
+    <!-- Pixel CSS -->
+    <link type="text/css" rel="stylesheet" href="../../css/style.css">
+
+<script>
+    function findChar(str) {
+        var result = '';
+        var ctr = 0;
+        for (var i=0; i<str.length; i++) {
+            ctr = 0;
+            for (var j=0; j<str.length; j++) {
+                if (str[i]===str[j]) {
+                    ctr +=1;
+                }
+            }
+            if (ctr <2) {
+                result = str[i];
+                break;
+            }
+        }
+        if (result!='')
+            document.getElementById('output1').innerHTML = result;
+        else
+            document.getElementById('output1').innerHTML = "there is no nonrepeating chars";
+    }
+
+    function getComb(str) {
+        var result = [];
+        var x = function(prefix, str) {
+            for (var i=0; i < str.length; i++) {
+                result.push(prefix+str[i]);
+                x(prefix+str[i], str.slice(i+1));
+            }
+        }
+        x('', str);
+        document.getElementById('output2').innerHTML = result;
+    }
+
+    function countVowel(str) {
+        var n=0;
+        var vowels = 'aeiouAEIOU';
+
+        for(var i = 0; i < str.length; i++) {
+            if(vowels.indexOf(str[i]) !== -1) {
+                n++;
+            }
+        }
+        document.getElementById('output3').innerHTML = n;
+    }
+
+    function displayTime() {
+        var today = new Date();
+        var day = today.getDay();
+        var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+        var hour = today.getHours();
+        var minute = today.getMinutes();
+        var second = today.getSeconds();
+        var prepand = (hour >= 12)? " PM ":" AM ";
+        hour = (hour >= 12)? hour - 12: hour;
+        if (hour===0 && prepand===' PM ') 
+        { 
+            if (minute===0 && second===0)
+            { 
+                hour=12;
+                prepand=' Noon';
+            } 
+            else
+            { 
+                hour=12;
+                prepand=' PM';
+            } 
+        } 
+        if (hour===0 && prepand===' AM ') 
+        { 
+            if (minute===0 && second===0)
+            { 
+                hour=12;
+                prepand=' Midnight';
+            } 
+            else
+            { 
+                hour=12;
+                prepand=' AM';
+            } 
+        } 
+        document.getElementById('output4').innerHTML = "Today is: "+daylist[day]+". Current Time: "+hour+":"+minute+":"+second+prepand;
+    }
+    
+    function playSound() {
+        var audio = document.getElementById("sound");
+        audio.play();
+    }
+    
+</script>
+
+<style>
+    a.active{
+        font-weight: bold;
+    }
+</style>
+
+</head>
+<body>
+    
+    <main>
+        <!-- Hero -->
+            <section class="section section-lg bg-secondary overflow-hidden z-2">
+                <div class="container z-2">
+                    <div class="row justify-content-center ">
+                        <div class="col-12 col-xl-12">
+                            <div class="card card-tertiary">
+                                <div class="card-header text-left">
+                                    <span>Lab 8 (FRONTEND)</span>
+                                </div>
+                                <div class="card-body">
+
+
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="task1-tab" data-toggle="tab" href="#task1"
+                                                role="tab" aria-controls="task1" aria-selected="true">Task 1</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="task2-tab" data-toggle="tab" href="#task2"
+                                                role="tab" aria-controls="task2" aria-selected="false">Task 2</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="task3-tab" data-toggle="tab" href="#task3"
+                                                role="tab" aria-controls="task3" aria-selected="false">Task 3</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="task4-tab" data-toggle="tab" href="#task4"
+                                                role="tab" aria-controls="task4" aria-selected="false">Task 4</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="task5-tab" data-toggle="tab" href="#task5"
+                                                role="tab" aria-controls="task5" aria-selected="false">Task 5</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="task6-tab" data-toggle="tab" href="#task6"
+                                                role="tab" aria-controls="task6" aria-selected="false">Task 6</a>
+                                        </li>
+                                    </ul>
+                                        <div class="card">
+
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane show active" id="task1" role="tabpanel"
+                                            aria-labelledby="task1-tab">
+                                            <div>
+                                                <h5>Task 1. JavaScript function to find the first not repeated character.
+                                                </h5>
+                                                <form name="task1">
+                                                    <input id="t1" type="text" name="t1str" placeholder="enter something">
+                                                    <button type="button" onclick="findChar(document.forms['task1']['t1str'].value)"> Show Result </button>
+                                                </form>
+                                                <table>
+                                                    <tr>
+                                                        <td>Result: </td>
+                                                        <th><div id="output1"> </div></th>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="task2" role="tabpanel" aria-labelledby="task2-tab">
+                                            <div>
+                                                <h5>Task 2. JavaScript function that generates all combinations of a string.</h5>
+                                                <form name="task2">
+                                                    <input type="text" name="t2num" placeholder="enter something">
+                                                    <button type="button" onclick="getComb(document.forms['task2']['t2num'].value)"> Show Result </button>
+                                                </form>
+                                                <table>
+                                                    <tr>
+                                                        <td>Result: </td>
+                                                        <th><div id="output2"> </div></th>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="task3" role="tabpanel" aria-labelledby="task3-tab">
+                                            <div>
+                                                <h5>Task 3. JavaScript function that accepts a string as a parameter and counts the number of vowels within the string.
+                                                    </h5>
+                                                <form name="task3">
+                                                    <input type="text" name="t3num" placeholder="enter something">
+                                                
+                                                    <button type="button" onclick="countVowel(document.forms['task3']['t3num'].value)"> Show Result </button>
+                                                </form>
+                                                <table>
+                                                    <tr>
+                                                        <td>Result: </td>
+                                                        <th><div id="output3"> </div></th>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="task4" role="tabpanel" aria-labelledby="task4-tab">
+                                            <div>
+                                                <h5>Task 4. JavaScript program that displays the current day and time in the following format.</h5>
+                                                <form name="task4">
+                                                    <button type="button" onclick="displayTime()"> Show Result </button>
+                                                </form>
+                                                <table>
+                                                    <tr>
+                                                        <td>Result: </td>
+                                                        <th><div id="output4"> </div></th>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="task5" role="tabpanel" aria-labelledby="task5-tab">
+                                            <div>
+                                                <h5>Task 5. Enter key press detector</h5>
+                                                <input id="enterDetect" type="text" name="t5" placeholder="enter something">
+                                                <script>
+                                                    const textInput = document.getElementById('enterDetect');
+                                                    textInput.addEventListener('keydown', (event) => {
+                                                        if (event.key==='Enter') 
+                                                            document.getElementById('output5').innerHTML="Pressed key is Enter";
+                                                        else
+                                                            document.getElementById('output5').innerHTML="Pressed key is NOT Enter";
+                                                    });
+                                                </script>
+                                                <table>
+                                                    <tr>
+                                                        <td>Result: </td>
+                                                        <th><div id="output5"> </div></th>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="task6" role="tabpanel" aria-labelledby="task6-tab">
+                                            <div>
+                                                <h5>Task 6. JavaScript program that implements a sound effect</h5>
+                                                <audio id="sound">
+                                                    <source src="sound.wav" type="audio/wav">
+                                                </audio>
+                                                <form name="task6">
+                                                    <button type="button" onclick="playSound()"> Play Sound </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    </main> 
+<footer>
+    <nav id="navbar-footer"
+        class="navbar navbar-main navbar-expand-lg navbar-dark justify-content-between navbar-footer">
+        <ul class="navbar-nav navbar-nav-hover flex-row align-items-center">
+            <li class="nav-item">
+                <a href="../../index.html" class="nav-link" role="button">
+                    <span class="nav-link-inner-text"><b>📺 Start</b></span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../aboutme.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">🗣️ AboutMe</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../roadmap.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">💻 Roadmap</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../whatsnew.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">⭐ What's New?</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="../../frontend/content.html" class="nav-link" role="button">
+                <span class="nav-link-inner-text">Frontend (AITU)</span>
+                </a>
+            </li>
+        </ul>
+        <div class="time text-center">
+            <span class="time text-uppercase">1:50 PM</span>
+        </div>
+    </nav>
+</footer>
+
+<!-- Core -->
+<script src="../../jquery.min.js"></script>
+<script src="../../bootstrap.min.js"></script>
+
+<!-- pixel JS -->
+<script src="../../js/javascript.js"></script>
+</body>
+</html>
