@@ -8,16 +8,17 @@ function playGameOverSound() {
     gameOverSound.play(); 
 }
 
-var testMode = false; //Turn this variable to true to see where the mines are
+var testMode = false; //Turn this variable to true to see where the ss are
 
 var grid = document.getElementById("grid");
 var firstClick = true;
 var gameEnded = false;
-
+var lives = 3;
 var seconds = 0;
 var mines = 0;
 var appendSeconds = document.getElementById("seconds")
 var appendMines = document.getElementById("mines")
+var appendLives = document.getElementById("lives")
 var Interval; 
 
 var gridWidth;
@@ -28,7 +29,8 @@ generateGrid();
 
 function generateGrid() {
     getDifficulty();
-    
+    var comboLives = document.getElementById("livesSelect");
+    lives = comboLives.options[comboLives.selectedIndex].text;
     grid.innerHTML="";
     grid.className="";
     firstClick = true;
@@ -36,6 +38,7 @@ function generateGrid() {
     mines = "000";
     seconds = "000";
     clearInterval(Interval);
+    appendLives.innerHTML = lives;
     appendSeconds.innerHTML = seconds;
 
     for (var i=0; i<gridHeight; i++) {
@@ -147,7 +150,7 @@ function replaceMine(mineCell) {
     mineCell.setAttribute("data-mine","false");
 }
 
-    function checkLevelCompletion() {
+function checkLevelCompletion() {
     var levelComplete = true;
     for (var i=0; i<gridHeight; i++) {
         for(var j=0; j<gridWidth; j++) {
@@ -176,15 +179,21 @@ function revealMines(x) {
                 if (x==1)
                 {
                     playWinSound();
-                    cell.className="mine-win";
+                    if (cell.getAttribute("data-open")!="true") {
+                        cell.className="mine-win";
+                    }
                 }
                 else
                 {
                     playGameOverSound();
-                    cell.className="mine-lose";
+                    if (cell.getAttribute("data-open")!="true") {
+                        cell.className="mine-lose";
+                    }
                     grid.className="gameOver";
                 }
-                cell.innerHTML="<i class='fa-solid fa-land-mine-on fa-xs'></i>";
+                if (cell.getAttribute("data-flag")!="true") {
+                    cell.innerHTML="<i class='fa-solid fa-land-mine-on fa-xs'></i>";
+                }
             }
         }
     }
@@ -198,10 +207,10 @@ function addFlag(cell) {
             {
                 if (mines>0)
                 {
-                cell.setAttribute("data-flag","true");
-                cell.innerHTML="<i class='fa-solid fa-flag fa-xs'></i>";
-                mines--;
-                countMines(mines);
+                    cell.setAttribute("data-flag","true");
+                    cell.innerHTML="<i class='fa-solid fa-flag fa-xs'></i>";
+                    mines--;
+                    countMines(mines);
                 }
             }
             else if (cell.getAttribute("data-flag")=="true")
@@ -213,6 +222,38 @@ function addFlag(cell) {
             }
         }
     }
+}
+
+function chord(cell) {
+    var flagCount=0;
+    var cellRow = cell.parentNode.rowIndex;
+    var cellCol = cell.cellIndex;
+    for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
+    {
+        for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
+        {
+            if (grid.rows[i].cells[j].getAttribute("data-flag")=="true") flagCount++;
+        }
+    }
+    if(flagCount==cell.innerHTML) {
+        //alert(flagCount+" flags found around, " + cell.innerHTML+" mines found around. chord will be performed");
+        for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
+        {
+            for (var i=Math.max(cellRow-1,0); i<=Math.min(cellRow+1,gridHeight-1); i++) 
+                    {
+                        for(var j=Math.max(cellCol-1,0); j<=Math.min(cellCol+1,gridWidth-1); j++) 
+                        {
+                        //Recursive Call
+                        if(grid.rows[i].cells[j].getAttribute("data-open")=="false")
+                        clickCell(grid.rows[i].cells[j]);
+                        }
+                    } 
+        }
+    }
+    else{}
+        //alert(flagCount+" flags found around, " + cell.innerHTML+" mines found around. chord cannot be performed");
+    
+
 }
 
 function clickCell(cell) 
@@ -233,10 +274,23 @@ function clickCell(cell)
             //check if cell HAVE a mine
             if (cell.getAttribute("data-mine")=="true") 
             {
-                revealMines(0);
-                cell.className="mine-triggered";
-                loseNotification();
-                //alert("Game Over");
+                lives--;
+                appendLives.innerHTML = lives;
+
+                if(lives>0){
+                    playGameOverSound();
+                    cell.className="mine-triggered";
+                    cell.setAttribute("data-open","true");
+                    cell.setAttribute("data-flag","true");
+                    cell.innerHTML="<i class='fa-solid fa-land-mine-on fa-xs'></i>";
+                }
+                else {
+                    revealMines(0);
+                    cell.className="mine-triggered";
+                    loseNotification();
+                    //alert("Game Over");
+                }
+                
             } 
             //check if cell is NOT opened yet
             else if (cell.getAttribute("data-open")=="false")
@@ -269,20 +323,28 @@ function clickCell(cell)
                     } 
                 }
             }
-            switch (mineCount) {
-            case 0: cell.innerHTML=" ";           break;
-            case 1: cell.style.color = '#3399ff'; break;
-            case 2: cell.style.color = '#66ff99'; break;
-            case 3: cell.style.color = '#ff6666'; break;
-            case 4: cell.style.color = '#0033cc'; break;
-            case 5: cell.style.color = '#cc0066'; break;
-            case 6: cell.style.color = '#33cccc'; break;
-            case 7: cell.style.color = '#cccccc'; break;
-            case 8: cell.style.color = '#cc33ff'; break;
+            else if (cell.getAttribute("data-open")=="true" && cell.innerHTML!=' ' && firstClick==false)
+            {
+                chord(cell);
             }
+            setMineNumber(cell, mineCount);
             checkLevelCompletion();
         }
     }
+}
+
+function setMineNumber(cell, mineCount) {
+    switch (mineCount) {
+        case 0: cell.innerHTML=" ";           break;
+        case 1: cell.style.color = '#3399ff'; break;
+        case 2: cell.style.color = '#66ff99'; break;
+        case 3: cell.style.color = '#ff6666'; break;
+        case 4: cell.style.color = '#0033cc'; break;
+        case 5: cell.style.color = '#cc0066'; break;
+        case 6: cell.style.color = '#33cccc'; break;
+        case 7: cell.style.color = '#cccccc'; break;
+        case 8: cell.style.color = '#cc33ff'; break;
+        }
 }
 
 function displayCustomPar(i) {
@@ -448,11 +510,3 @@ function loseNotification()
     // After 3 seconds, remove the show class from DIV
     setTimeout(function(){ z.className = z.className.replace("show", ""); }, 3000);
 }
-
-document.body.onkeydown = function(e)
-{
-    //alert(String.fromCharCode(e.keyCode)+" --> "+e.keyCode);
-    if (e.keyCode==17) {
-        generateGrid();
-    }
-};

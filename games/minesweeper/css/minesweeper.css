@@ -7,13 +7,13 @@ div {
   font-family: myFirstFont;
 }
 
+
 .gridScroll{
   width: auto;
   height: auto;
   overflow-x:auto;
   overflow-y: auto;
   text-align: center;
-  padding: 20px;
 }
 .button {
   background-color: #000000;
@@ -43,7 +43,7 @@ body {
   font-family: myFirstFont;
   text-align: center;
     position:relative; 
-    background-image: url('../img/mine.gif');
+    background-image: url('../img/mine_bg.gif');
 }
 
 h1 {
@@ -52,9 +52,17 @@ h1 {
   font-weight: normal;
 }
 #grid {
+  border: 3px solid #ffe055;
+  border-radius: 10px;
+  padding: 5px;
   margin-left: auto;
   margin-right: auto;
   cursor: pointer;
+}
+
+.icon{
+  max-width: 24px;
+  max-height: 24px;
 }
 
 #grid TR TD{
@@ -87,9 +95,9 @@ h1 {
 button {
   margin: 20px;
 }
-.gameInfo
+.hud
 {
-  font-size: 16pt;
+  font-size: 20px;
 }
 
 .win {

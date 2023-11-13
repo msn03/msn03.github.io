@@ -26,6 +26,9 @@
   .select-style {
     display: none;
   }
+  .hud {
+    min-width: 75px;
+  }
   .customParam, .hud {
       display: inline-block;
     }
@@ -37,11 +40,6 @@
         display: inline-block;
     }
     .customParam {
-      width: 100%;
-    }
-  }
-  @media screen and (max-width: 400px) {
-    .hud {
       width: 100%;
     }
   }
@@ -61,18 +59,23 @@
     <H1 class="rainbow rainbow_text_animated">Minesweeper</H1>
   </div>
 
+  <div class="gridBorder">
   <div class="gridScroll unselectable">
+    
   <table id=grid>
   </table>
+  </div>
   </div>
 
   <div>
   <p class="gameInfo">
-    <div class="hud"><i class="fa-regular fa-clock">&nbsp;</i><span id="seconds">000</span> </div>
-    <div class="hud"><button onclick="generateGrid();" class="button">New Game</button></div>
-    <div class="hud"><i class="fa-solid fa-land-mine-on"></i>&nbsp;</i><span id="mines">000</span></div>
+    <div class="hud"><img src="img/live2.gif" class="icon"></img>&nbsp;<span id="lives"> 1</span></div>
+    <div class="hud"><img src="img/time.gif" class="icon"></img>&nbsp;<span id="seconds">000</span></div>
+    <div class="hud"><img src="img/mine.gif" class="icon"></img>&nbsp;</i><span id="mines">000</span></div>
   </p>
+  <div class="hud"><button onclick="generateGrid();" class="button">New Game</button></div>
   </div>
+  <br>
   
   <span class="contrast">Difficulty:</span>
   <select class="select-style" id="difficultySelect" onchange="syncRadio(this.selectedIndex); difficultyNotification(); if(this.selectedIndex==3){displayCustomPar(1);}else{displayCustomPar(0);}">
@@ -118,7 +121,15 @@
       <input type="number" id="gMines" name="gMines" value="10" min="10" max="999">
     </div>
   </div>
-
+  <br><br>
+  <div>
+    <span class="contrast">Lives: </span>
+    <select id="livesSelect">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+  </select>
+  </div>
   <br>
 
   <p id="expandable"><span class="contrast">&lt; Controls</span> (click me) <span class="contrast">&gt;</span></p>
@@ -126,11 +137,11 @@
   <div id="expandableText">
     <p><span class="contrast">Left Click</span>/<span class="contrast">Tap</span> - Open Cell</p>
     <p><span class="contrast">Right Click</span>/<span class="contrast">Hold</span> - Put the Flag</p>
-    <p><span class="contrast">Ctrl</span> - Quick New Game</p>
+    <p><span class="contrast">Click open cell</span> - Perform chord (flags nearby=num on cell)</p>
     <button onclick="window.location.href='help.html';" class="button">How to Play?</button>
   </div>
 
-  <p><span class="contrast">2023</span>. Made by <span class="contrast">Rasul Amantay</span></p>
+  <p><span class="contrast">2023</span>. Made by <a href="https://msn03.github.io" target="_blank"><span class="contrast">Rasul Amantay</span></a></p>
 
   <div id="msgDifficulty" class="snackbar"><span class="contrast">New difficulty</span> will be applied in the <span class="contrast">new game</span>.</div>
   <div id="msgWin" class="snackbar win">You <span class="contrast">won</span>! Time spent: <span class="contrast" id="timeSpent">0</span>.</div>
